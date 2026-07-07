@@ -36,12 +36,14 @@ module top;
     test_t1 tstt1;
     test_t2 tstt2;
     test_t3 tstt3;
+    test_t4 tstt4;
     // Start test
     initial begin
         tst = new(intrf.drv, intrf.mon, intrf.refr);
         tstt1 = new(intrf.drv, intrf.mon, intrf.refr);
         tstt2 = new(intrf.drv, intrf.mon, intrf.refr);
         tstt3 = new(intrf.drv, intrf.mon, intrf.refr);
+        tstt4 = new(intrf.drv, intrf.mon, intrf.refr);
         $display("-------------------------BASE TEST-------------------------");
 	tst.run();
         $display("-------------------------TEST 1-------------------------");
@@ -50,6 +52,8 @@ module top;
 	tstt2.run();
         $display("-------------------------TEST 3-------------------------");
 	tstt3.run();
+        $display("-------------------------TEST 4-------------------------");
+	tstt4.run();
 	$finish();
     end
 

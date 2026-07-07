@@ -70,3 +70,20 @@ end
 endtask
 endclass
 
+class test_t4 extends test;
+ trans_read_write_chk trans_t4;
+function new(virtual ram_intf.drv drv_vif, virtual ram_intf.mon mon_vif, virtual ram_intf.refr ref_vif);
+        super.new(drv_vif, mon_vif, ref_vif);
+endfunction
+
+task run();
+ env=new(drv_vif,mon_vif,ref_vif);
+ env.build;
+begin
+        trans_t4 = new();
+        env.gen.trans = trans_t4;
+end
+ env.run;
+endtask
+endclass
+
