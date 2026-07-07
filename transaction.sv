@@ -54,3 +54,31 @@ virtual function transaction copy();
  return copy;
 endfunction
 endclass
+
+
+class trans_read_write_chk extends transaction;
+bit [4:0]q[$];
+constraint c {
+        (!read_enb && write_enb) || (read_enb && !write_enb); 
+    }
+
+    function void post_randomize();
+        if (write_enb)
+            q.push_front(address);
+
+        if (read_enb && q.size() > 0)
+            address = q.pop_back();
+    endfunction
+virtual function transaction copy();
+ copy = new();
+ copy.data_in=this.data_in;
+ copy.write_enb=this.write_enb;
+ copy.read_enb=this.read_enb;
+ copy.address=this.address;
+ return copy;
+endfunction
+endclass
+
+
+
+
